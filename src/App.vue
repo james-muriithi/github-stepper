@@ -1,56 +1,28 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
+    <Navbar />
+    <v-main class="grey lighten-5">
+      <v-row justify="center" align="center" class="h-100 px-2 px-md-0">
+        <v-col md="6" sm="9">
+          <v-card class="pa-6 shadow">
+            <Stepper />
+          </v-card>
+        </v-col>
+      </v-row>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Navbar from "./components/Navbar.vue";
+import Stepper from "./components/Stepper.vue";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    HelloWorld,
+    Navbar,
+    Stepper,
   },
 
   data: () => ({
@@ -58,3 +30,8 @@ export default {
   }),
 };
 </script>
+<style lang="scss" scoped>
+.shadow {
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+}
+</style>
