@@ -31,17 +31,23 @@ const steps = {
             return state.userData.email
         },
         github(state) {
-            return state.userData.githubProfile
+            return state.githubProfile
         }
     },
     mutations: {
         setUserData(state, data) {
             Object.assign(state.userData, {...data})
+        },
+        setGithubProfile(state, data){
+            state.githubProfile = Object.assign({}, data)
         }
     },
     actions: {
         setUserData({ commit }, data) {
             commit('setUserData', data)
+        },
+        setGithubProfile({commit}, data){
+            commit('setGithubProfile', data)
         }
     },
 }

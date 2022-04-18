@@ -1,6 +1,6 @@
 <template>
   <v-stepper-content :step="step">
-    <v-card class="mb-4 pt-2" flat>
+    <v-form ref="form" class="mb-4 pt-2">
       <h3>Terms and conditions</h3>
       <div class="mt-5">
         <v-text-field
@@ -20,7 +20,7 @@
           ref="tos"
         />
       </div>
-    </v-card>
+    </v-form>
   </v-stepper-content>
 </template>
 
@@ -56,6 +56,9 @@ export default {
       });
       if (!this.formHasErrors) this.$store.dispatch("steps/setUserData", this.form);
       return !this.formHasErrors;
+    },
+    reset(){
+      this.$refs.form.reset()
     },
   },
 };

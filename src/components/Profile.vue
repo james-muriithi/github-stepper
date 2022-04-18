@@ -5,8 +5,8 @@
             <div class="">
               <v-avatar color="primary" size="56">
                 <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
-                  alt="John"
+                  :src="github.avatar_url"
+                  :alt="firstName"
                 />
               </v-avatar>
             </div>
@@ -23,14 +23,14 @@
               </v-btn>
             </div>
             <div class="ml-sm-auto">
-              <v-btn href="#" target="_blank" text>
+              <v-btn :href="github.html_url" target="_blank" text>
                 <span class="mr-2">view profile</span>
                 <v-icon>mdi-open-in-new</v-icon>
               </v-btn>
             </div>
           </v-row>
           <div class="text-center mt-5">
-            <v-btn color="primary" @click="currentStep = 1" outlined> go to home </v-btn>
+            <v-btn color="primary" @click="$emit('goHome')" outlined> go to home </v-btn>
           </div>
         </v-card>
       </v-stepper-content>
@@ -40,6 +40,7 @@
 import { mapGetters } from 'vuex'
 export default {
     name: "Profile",
+    emits: ['goHome'],
     props: {
     step: {
       type: Number,
