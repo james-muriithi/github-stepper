@@ -3,7 +3,7 @@
     <Navbar />
     <v-main class="grey lighten-5">
       <v-row justify="center" align="center" class="h-100 px-2 px-md-0">
-        <v-col md="6" sm="9">
+        <v-col lg="6" md="7" sm="10">
           <v-card class="pa-6 shadow">
             <Stepper />
           </v-card>
