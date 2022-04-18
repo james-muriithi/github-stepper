@@ -5,7 +5,7 @@
             <div class="">
               <v-avatar color="primary" size="56">
                 <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  :src="github.avatar_url"
                   alt="John"
                 />
               </v-avatar>
@@ -23,7 +23,7 @@
               </v-btn>
             </div>
             <div class="ml-sm-auto">
-              <v-btn href="#" target="_blank" text>
+              <v-btn :href="github.html_url" target="_blank" text>
                 <span class="mr-2">view profile</span>
                 <v-icon>mdi-open-in-new</v-icon>
               </v-btn>
