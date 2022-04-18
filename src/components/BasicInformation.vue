@@ -1,6 +1,6 @@
 <template>
   <v-stepper-content :step="step">
-    <v-card class="mb-4 pt-2" flat ref="form">
+    <v-form class="mb-4 pt-2" ref="form">
       <h3>Basic Information</h3>
       <div class="mt-5">
         <v-text-field
@@ -33,7 +33,7 @@
           :loading="loading"
         />
       </div>
-    </v-card>
+    </v-form>
   </v-stepper-content>
 </template>
 
@@ -57,7 +57,7 @@ export default {
         username: "",
       },
       githubProfile: {},
-      githubErrors: []
+      githubErrors: [],
     };
   },
   watch: {
@@ -76,16 +76,23 @@ export default {
       this.formHasErrors = false;
       Object.keys(this.form).forEach((f) => {
         if (this.$refs[f].hasError) this.formHasErrors = true;
-        this.$refs[f].validate();
+        this.$refs[f].validate(true);
       });
-      if (!this.formHasErrors)
+      if (!this.formHasErrors) {
         this.$store.dispatch("steps/setUserData", this.form);
         this.$store.dispatch("steps/setGithubProfile", this.githubProfile);
+      }
 
       return !this.formHasErrors;
     },
-    validateProfile(){
-        return Object.keys(this.githubProfile).length > 0 || "Github user does not exist"
+    validateProfile() {
+      return (
+        Object.keys(this.githubProfile).length > 0 ||
+        "Github user does not exist"
+      );
+    },
+    reset(){
+      this.$refs.form.reset()
     },
     fetchUserDebounced() {
       // cancel pending call
@@ -93,7 +100,7 @@ export default {
       this.loading = false;
       this.formHasErrors = false;
       this.githubProfile = {};
-      this.githubErrors = []
+      this.githubErrors = [];
 
       // delay new call 1000ms
       this._timerId = setTimeout(async () => {
@@ -101,9 +108,8 @@ export default {
           this.loading = true;
           this.githubProfile = (await this.fetchUserDetails()).data;
         } catch (error) {
-            // console.log(this.$refs['username'].validate(false));
           this.$refs["username"].valid = false;
-          this.githubErrors = ["Github user does not exist"]
+          this.githubErrors = ["Github user does not exist"];
         }
         this.loading = false;
       }, 1000);

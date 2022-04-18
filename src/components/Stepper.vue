@@ -18,7 +18,7 @@
 
       <TermsOfService ref="step_3" :step="3" />
 
-      <Profile ref="step_4" :step="4" />
+      <Profile ref="step_4" @goHome="start" :step="4" />
 
       <div class="d-flex" v-if="currentStep != steps.length">
         <v-btn
@@ -32,6 +32,7 @@
           color="primary"
           @click="goToNextStep(currentStep)"
           class="ml-auto"
+          :disabled="$refs[`step_${currentStep}`] && $refs[`step_${currentStep}`].loading"
         >
           Continue
         </v-btn>
@@ -66,6 +67,11 @@ export default {
       if (this.$refs[`step_${currentStep}`].isStepValid())
         this.currentStep += 1;
     },
+    start(){
+      this.currentStep = 1;
+      this.$refs[`step_2`].reset()
+      this.$refs[`step_3`].reset()
+    }
   },
 };
 </script>
